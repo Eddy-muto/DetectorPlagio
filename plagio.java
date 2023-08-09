@@ -9,13 +9,13 @@ public class plagio {
         String text1 = ruta1;
         String text2 = ruta2;
         String resultado="";
-        String[] words1 = preprocessAndSplit(text1);
-        String[] words2 = preprocessAndSplit(text2);
+        String[] words1 = procesarArchivo(text1);
+        String[] words2 = procesarArchivo(text2);
 
         BST tree1 = buildTree(words1);
         BST tree2 = buildTree(words2);
 
-        double similarity = calculateSimilarity(tree1, tree2);
+        double similarity = CalculaSimilitudes(tree1, tree2);
         if(similarity>10){
             resultado="HUBO PLAGIO: Porcentaje de similitud: " + similarity + "%";
         }else{
@@ -35,15 +35,15 @@ public class plagio {
         return tree;
     }
 
-    private static double calculateSimilarity(BST tree1, BST tree2) {
-        int commonNodes = countCommonNodes(tree1.root, tree2.root);
-        int totalNodes = Math.min(countNodes(tree1.root), countNodes(tree2.root));
+    private static double CalculaSimilitudes(BST tree1, BST tree2) {
+        int NodosComunes = contarNodosIguales(tree1.root, tree2.root);
+        int total_Nodos = Math.min(ContarNodos(tree1.root), ContarNodos(tree2.root));
     
-        double similarity = (double) commonNodes / totalNodes * 100.0;
-        return similarity;
+        double similitud = (double) NodosComunes / total_Nodos * 100.0;
+        return similitud;
     }
     
-    private static int countCommonNodes(TreeNode root1, TreeNode root2) {
+    private static int contarNodosIguales(TreeNode root1, TreeNode root2) {
         if (root1 == null || root2 == null) {
             return 0;
         }
@@ -53,21 +53,21 @@ public class plagio {
             count = 1;
         }
     
-        count += countCommonNodes(root1.left, root2.left);
-        count += countCommonNodes(root1.right, root2.right);
+        count += contarNodosIguales(root1.left, root2.left);
+        count += contarNodosIguales(root1.right, root2.right);
     
         return count;
     }
     
-    private static int countNodes(TreeNode root) {
+    private static int ContarNodos(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        return 1 + countNodes(root.left) + countNodes(root.right);
+        return 1 + ContarNodos(root.left) + ContarNodos(root.right);
     }
 
     //prueba
-     public static String[] preprocessAndSplit(String rutaArchivo) throws IOException {
+     public static String[] procesarArchivo(String rutaArchivo) throws IOException {
         String contenidoCompleto = leerArchivo(rutaArchivo);
         String[] palabras = contenidoCompleto.split("\\s+"); 
         String[] palabrasFiltradas = filtrarCaracteres(palabras);
