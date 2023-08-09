@@ -27,7 +27,7 @@ public class plagio {
 
 
     private static BST buildTree(String[] words) {
-        // Construir un árbol de búsqueda binaria usando las palabras del array
+        
         BST tree = new BST();
         for (String word : words) {
             tree.insert(word);
@@ -69,7 +69,7 @@ public class plagio {
     //prueba
      public static String[] preprocessAndSplit(String rutaArchivo) throws IOException {
         String contenidoCompleto = leerArchivo(rutaArchivo);
-        String[] palabras = contenidoCompleto.split("\\s+"); // Dividir por espacios en blanco
+        String[] palabras = contenidoCompleto.split("\\s+"); 
         String[] palabrasFiltradas = filtrarCaracteres(palabras);
 
         return palabrasFiltradas;

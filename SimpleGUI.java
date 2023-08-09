@@ -12,7 +12,7 @@ public class SimpleGUI {
     private JTextArea resultArea;
 
     public SimpleGUI() {
-        frame = new JFrame("Interfaz Simple");
+        frame = new JFrame("Detector Plagio");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
 
@@ -57,7 +57,7 @@ public class SimpleGUI {
                 try {
                     result = plagio.DetectorDePlagio(path1, path2);
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
+                    
                     result="ERROR";
                 }
                 resultArea.setText(result);
